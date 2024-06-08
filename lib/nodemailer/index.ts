@@ -23,21 +23,21 @@ export async  function  generateEmailBody(){
 }
 
 const transporter = nodemailer.createTransport({
-   pool:true,
-    service:'hotmail',
-    secure:false,
-    auth:{
-        user:process.env.EMAIL_USER,
-        pass:process.env.EMAIL_PASS
-    },
-
-    maxConnections:34
+   pool: true,
+   host: "smtp.live.com",
+   port: 587,
+   secure: false, // TLS
+   auth: {
+       user: process.env.EMAIL_USER,
+       pass: process.env.EMAIL_PASS
+   },
+   maxConnections: 34
 
 })
 
 export const sendEmail =async (emailContent:EmailContent,sendTo:string[])=>{
  const mailOption = {
-    from:'shijan23@hotmail.com',
+    from:process.env.EMAIL_USER,
     to:sendTo,
     html:emailContent.body,
     subject:emailContent.subject
