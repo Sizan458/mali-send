@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import Cards from './component/Cards';
+import Footer from './component/Footer';
 
 export default function Home() {
   return (
@@ -36,6 +37,9 @@ export default function Home() {
       title='Responsive design'
       dis='This clean email template features responsive design. Its layout adapts seamlessly to different devices and screen sizes. The concise content ensures easy readability on any platform.'
       />
+     </div>
+     <div className='mt-8 py-3'>
+      <Footer/>
      </div>
     </>
   );

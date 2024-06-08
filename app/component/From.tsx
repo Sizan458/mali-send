@@ -38,10 +38,10 @@ const EmailForm = () => {
     return (
         <div>
             <form className='flex flex-col mt-5' onSubmit={handleSubmit}>
-                <label htmlFor="email" className='text-sm font-medium text-gray-700'>
+                <label htmlFor="email" className='text-xl  text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-white'>
                     Email address
                 </label>
-                <div className='dialog-input_container'>
+                <div className=' mb-5'>
                     <input
                         type="email"
                         required
@@ -49,14 +49,14 @@ const EmailForm = () => {
                         placeholder='Enter your email address'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className='dialog-input'
+                        className=' w-full h-[60px] rounded-full text-center'
                     />
                 </div>
                 <button type='submit' className='btn'>
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
             </form>
-            {message && <p>{message}</p>}
+            {message && <p className='mt-2  text-center font-bold font-spaceGrotesk text-xl text-black dark:text-white'>{message}</p>}
         </div>
     );
 };
