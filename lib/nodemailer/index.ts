@@ -23,17 +23,21 @@ export async  function  generateEmailBody(){
 }
 
 const transporter = nodemailer.createTransport({
-   pool:true,
-    service:'hotmail',
-    secure:false,
-    auth:{
-        user:process.env.EMAIL_USER,
-        pass:process.env.EMAIL_PASS
-    },
+   pool: true,
+   service: 'hotmail',
+   secure:false, // Use TLS
+   auth: {
+       user: process.env.EMAIL_USER,
+       pass: process.env.EMAIL_PASS
+   },
+  
+   maxConnections: 34,
+   maxMessages: 100, // Example rate limiting
+   rateDelta: 10000, // Example rate limiting (10 seconds)
+   rateLimit: 5 // Max 5 messages per 10 seconds
+});
 
-    maxConnections:34
 
-})
 
 export const sendEmail =async (emailContent:EmailContent,sendTo:string[])=>{
  const mailOption = {
