@@ -2,32 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply font-inter;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+
+ /* NAVBAR */
+  
+   .nav {
+    @apply flex justify-between items-center px-6 md:px-20 py-4;
   }
+
+  .nav-logo {
+    @apply font-spaceGrotesk text-[21px] text-secondary font-bold  ;
+  }
+/* Banner */
+.banner-text{
+  @apply  font-spaceGrotesk text-[40px] font-bold  -mt-[120px] text-white px-7   lg:-mt-[240px]   lg:text-[80px] xl:text-[100px] xl:-mt-[300px];
+}
+.section-text{
+  @apply font-spaceGrotesk mt-5 px-2  text-center text-[20px] font-bold  md:text-[40px] dark:text-white;
+}
+
+.section-p{
+  @apply  font-inter  mt-2 p-2  text-[20px] font-semibold dark:text-zinc-950 text-left;
+} 
+
+.cards{
+  @apply  text-center font-spaceGrotesk font-bold  text-black  ;
+}
+.btn {
+  @apply  bg-secondary hover:bg-opacity-70 rounded-[30px] text-white text-lg font-semibold;
 }
