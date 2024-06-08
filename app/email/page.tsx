@@ -10,7 +10,7 @@ const Email = () => {
       <div className=' w-[50%] mx-auto mt-2'>
         <From/>
       </div>
-     <div className='mt-[233px] py-3'>
+     <div className='mt-[230.5px] py-3'>
      <Footer/>
      </div>
      

@@ -9,10 +9,10 @@ export default function Home() {
 <>
     <section className='px-6 py-5  md:px-20  '>
       <div className=' '>
-      <Image src='/Image/pics/banner.jpg' alt='banner' width={1280} height={20}   className=''/>
-      <div className=' bg-lime-500 flex '>
+      <Image src='/Image/pics/banner.jpg' alt='banner' width={1280} height={20}   className=' rounded-lg'/>
+      <div className='  flex  flex-col md:flex-row'>
        <p className='banner-text '>Welcome to <br/> Quik <span className=' text-primary'>Send</span> </p>
-       <button className='btn -mt-[90px]'><Link href='/email'>Send Email Now</Link></button>
+       <button className='btn -mt-[15px] md:-mt-[90px]'><Link href='/email'>Send Email Now</Link></button>
       </div>
       </div>
       <div>
