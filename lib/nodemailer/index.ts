@@ -19,7 +19,11 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    maxConnections: 34,
+    maxMessages: 100, 
+    rateDelta: 10000, 
+    rateLimit: 5
 });
 
 
