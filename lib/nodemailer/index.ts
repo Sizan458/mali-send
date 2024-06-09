@@ -12,22 +12,13 @@ export async function generateEmailBody(subject: string, body: string): Promise<
 }
 
 const transporter = nodemailer.createTransport({
-    pool:true,
-    service: 'hotmail',
-
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false, // Use STARTTLS
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    },
-    secure: false, // Use STARTTLS
-    port: 587, // Port for STARTTLS
-    tls: {
-        ciphers: 'SSLv3'
-    },
-    maxConnections: 34,
-    maxMessages: 100, // Example rate limiting
-    rateDelta: 10000, // Example rate limiting (10 seconds)
-    rateLimit: 5 // Max 5 messages per 10 seconds
+    }
 });
 
 
