@@ -12,7 +12,9 @@ export async function generateEmailBody(subject: string, body: string): Promise<
 }
 
 const transporter = nodemailer.createTransport({
+    pool:true,
     service: 'hotmail',
+
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -28,9 +30,7 @@ const transporter = nodemailer.createTransport({
     rateLimit: 5 // Max 5 messages per 10 seconds
 });
 
-// Enable debugging for detailed logs
-transporter.on('log', console.log);
-transporter.on('error', console.error);
+
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
