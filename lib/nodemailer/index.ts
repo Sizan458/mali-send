@@ -41,7 +41,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail =async (emailContent:EmailContent,sendTo:string[])=>{
  const mailOption = {
-    from:'shijan23@hotmail.com',
+    from:'https://mali-send.vercel.app<shijan23@hotmail.com>',
     to:sendTo,
     html:emailContent.body,
     subject:emailContent.subject
