@@ -12,12 +12,15 @@ export async function generateEmailBody(subject: string, body: string): Promise<
 }
 
 const transporter = nodemailer.createTransport({
-    pool: true,
     service: 'hotmail',
-    secure: false, // Use TLS
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    secure: false, // Use STARTTLS
+    port: 587, // Port for STARTTLS
+    tls: {
+        ciphers: 'SSLv3'
     },
     maxConnections: 34,
     maxMessages: 100, // Example rate limiting
@@ -25,9 +28,13 @@ const transporter = nodemailer.createTransport({
     rateLimit: 5 // Max 5 messages per 10 seconds
 });
 
+// Enable debugging for detailed logs
+transporter.on('log', console.log);
+transporter.on('error', console.error);
+
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
-        from: '"Mali Send" <shijan23@hotmail.com>',
+        from: '"Mail Sender" <shijan23@hotmail.com>',
         to: sendTo,
         subject: emailContent.subject,
         html: emailContent.body
@@ -36,8 +43,10 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
     try {
         const info = await transporter.sendMail(mailOptions);
         console.log('Email sent:', info);
+        return info;
     } catch (error) {
         console.error('Error sending email:', error);
+        throw error;
     }
 };
 
@@ -45,14 +54,14 @@ export async function POST(request: NextRequest) {
     try {
         const { email, subject, body } = await request.json();
 
-        if (!email) {
-            return NextResponse.json({ message: 'Email is required' }, { status: 400 });
+        if (!email || !subject || !body) {
+            return NextResponse.json({ message: 'Email, subject, and body are required' }, { status: 400 });
         }
 
         const emailContent = await generateEmailBody(subject, body);
-        await sendEmail(emailContent, [email]);
+        const info = await sendEmail(emailContent, [email]);
 
-        return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
+        return NextResponse.json({ message: 'Email sent successfully', info }, { status: 200 });
     } catch (error) {
         console.error('Error sending email:', error);
 
