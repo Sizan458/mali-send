@@ -23,6 +23,7 @@ export async  function  generateEmailBody(){
 }
 
 const transporter = nodemailer.createTransport({
+   
    pool: true,
    service: 'hotmail',
    secure:false, // Use TLS
@@ -41,7 +42,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail =async (emailContent:EmailContent,sendTo:string[])=>{
  const mailOption = {
-    from:'https://mali-send.vercel.app<shijan23@hotmail.com>',
+    from:'"Mali Send" <shijan23@hotmail.com>',
     to:sendTo,
     html:emailContent.body,
     subject:emailContent.subject
