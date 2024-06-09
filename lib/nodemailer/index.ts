@@ -12,7 +12,8 @@ export async function generateEmailBody(subject: string, body: string): Promise<
 }
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
+    service:'gmail',
+    host: 'smtp.gmail.com',
     port: 587,
     secure: false, // Use STARTTLS
     auth: {
@@ -25,7 +26,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
-        from: '"Mail Sender" <shijan23@hotmail.com>',
+        from: '"Mail Sender" <www.shijan23@gmail.com>',
         to: sendTo,
         subject: emailContent.subject,
         html: emailContent.body
