@@ -6,7 +6,7 @@ export interface EmailContent {
     subject: string;
     body: string;
 }
-
+//yogl sjnt sfcc zbut
 export async function generateEmailBody(subject: string, body: string): Promise<EmailContent> {
     return { subject, body };
 }
@@ -31,7 +31,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
-        from: '"Mail Sender" <www.shijan23@gmail.com>',
+        from: '"Mail Sender" <sizanm852@gmail.com>',
         to: sendTo,
         subject: emailContent.subject,
         html: emailContent.body
