@@ -42,7 +42,7 @@ const EmailForm = () => {
     return (
         <div className="container mx-auto p-4">
             <form className='flex flex-col mt-5' onSubmit={handleSubmit}>
-                <label htmlFor="email" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-white'>
+                <label htmlFor="email" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-black'>
                     Email address
                 </label>
                 <div className='mb-5'>
@@ -56,7 +56,7 @@ const EmailForm = () => {
                         className='w-full h-[60px] rounded-full text-center'
                     />
                 </div>
-                <label htmlFor="subject" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-white'>
+                <label htmlFor="subject" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-black'>
                     Subject
                 </label>
                 <div className='mb-5'>
@@ -70,8 +70,8 @@ const EmailForm = () => {
                         className='w-full h-[60px] rounded-full text-center'
                     />
                 </div>
-                <label htmlFor="body" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-white'>
-                    Body
+                <label htmlFor="body" className='text-xl text-gray-700 font-spaceGrotesk my-4 font-bold dark:text-black'>
+                    Message
                 </label>
                 <div className='mb-5'>
                     <textarea
