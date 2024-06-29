@@ -1,19 +1,17 @@
-"use server"
-import nodemailer from "nodemailer";
-import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export interface EmailContent {
     subject: string;
     body: string;
 }
-//yogl sjnt sfcc zbut
+
 export async function generateEmailBody(subject: string, body: string): Promise<EmailContent> {
     return { subject, body };
 }
 
 const transporter = nodemailer.createTransport({
-    pool:true,
-    service:'gmail',
+    pool: true,
+    service: 'gmail',
     host: 'smtp.gmail.com',
     port: 587,
     secure: false, // Use STARTTLS
@@ -22,17 +20,15 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     },
     maxConnections: 34,
-    maxMessages: 100, 
-    rateDelta: 10000, 
+    maxMessages: 100,
+    rateDelta: 10000,
     rateLimit: 5
 });
 
-
-
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
-        from: '"Mail Sender" <sizanm852@gmail.com>',
-        to: sendTo,
+        from: `"Mail Sender" <${process.env.EMAIL_USER}>`,
+        to: sendTo.join(','), // Join the array of email addresses
         subject: emailContent.subject,
         html: emailContent.body
     };
@@ -46,27 +42,3 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
         throw error;
     }
 };
-
-export async function POST(request: NextRequest) {
-    try {
-        const { email, subject, body } = await request.json();
-
-        if (!email || !subject || !body) {
-            return NextResponse.json({ message: 'Email, subject, and body are required' }, { status: 400 });
-        }
-
-        const emailContent = await generateEmailBody(subject, body);
-        const info = await sendEmail(emailContent, [email]);
-
-        return NextResponse.json({ message: 'Email sent successfully', info }, { status: 200 });
-    } catch (error) {
-        console.error('Error sending email:', error);
-
-        let errorMessage = 'Error sending email';
-        if (error instanceof Error) {
-            errorMessage = error.message;
-        }
-
-        return NextResponse.json({ message: errorMessage }, { status: 500 });
-    }
-}
